@@ -14,29 +14,29 @@ local r = require
 local Yield = r(YieldModule)
 
 local function Halt(Character)
-    while not Character:IsDescendantOf(workspace) do
-        Character.AncestryChanged:Wait()
-    end
-    RunService.Stepped:Wait()
+	while not Character:IsDescendantOf(workspace) do
+		Character.AncestryChanged:Wait()
+	end
+	RunService.Stepped:Wait()
 end
 local function PlayerAdded(Player)
-    Player.CharacterAdded:Connect(function(Character)
-        Halt(Character)
-        Character.Parent = Characters
+	Player.CharacterAdded:Connect(function(Character)
+		Halt(Character)
+		Character.Parent = Characters
 
-        local Humanoid = Character:WaitForChild("Humanoid")
-        Humanoid.DisplayName = Name
+		local Humanoid = Character:WaitForChild("Humanoid")
+		Humanoid.DisplayName = Name
 
-        Humanoid.Died:Connect(function()
-            Yield:Delay(Players.RespawnTime, Player.LoadCharacter, Player)
-        end)
-    end)
+		Humanoid.Died:Connect(function()
+			Yield:Delay(Players.RespawnTime, Player.LoadCharacter, Player)
+		end)
+	end)
 
-    Player.CharacterAppearanceId = UserID
-    Player:LoadCharacter()
+	Player.CharacterAppearanceId = UserID
+	Player:LoadCharacter()
 end
 
 Players.PlayerAdded:Connect(PlayerAdded)
 for _, Player in pairs(Players:GetPlayers()) do
-    Yield:Spawn(PlayerAdded, Player)
+	Yield:Spawn(PlayerAdded, Player)
 end
