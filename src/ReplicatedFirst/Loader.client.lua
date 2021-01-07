@@ -29,6 +29,7 @@ repeat
 	for _, Value in pairs(Values) do
 		Index += Value.Value == true and 1 or 0
 	end
+	RunService.RenderStepped:Wait()
 until Index >= Length
 
 warn("Loaded")

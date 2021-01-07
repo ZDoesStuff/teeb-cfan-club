@@ -13,6 +13,9 @@ local Error = Binds:WaitForChild("Error")
 local CameraPriority = Enum.RenderPriority.Camera
 local CurrentCamera = workspace.CurrentCamera
 
+local Loaded = workspace:WaitForChild("Loaded")
+local Value = Loaded:WaitForChild("Notifications")
+
 local format = string.format
 local FOV =
 {
@@ -64,3 +67,5 @@ Error.Event:Connect(function(Key)
 		}
 	)
 end)
+
+Value.Value = true

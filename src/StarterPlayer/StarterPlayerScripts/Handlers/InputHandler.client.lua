@@ -6,6 +6,9 @@ local Binds = ReplicatedStorage:WaitForChild("Binds")
 local Error = Binds:WaitForChild("Error")
 local Input = Binds:WaitForChild("Input")
 
+local Loaded = workspace:WaitForChild("Loaded")
+local Value = Loaded:WaitForChild("Input")
+
 local SinkResult = Enum.ContextActionResult.Sink
 
 local RDNew = Random.new
@@ -17,8 +20,7 @@ local Time = {2, 3}
 local function Delay(Key)
 	local Randomized = Randomizer:NextNumber(up(Time))
 	local Tick = 0
-
-	print(Randomized)
+	
 	local Down = true
 	while Tick < Randomized and Down do
 		Down = UserInputService:IsKeyDown(Key.KeyCode)
@@ -63,3 +65,5 @@ end)
 UserInputService.InputEnded:Connect(function(Key, ...)
 	Input:Fire(Key, ...)
 end)
+
+Value.Value = true
